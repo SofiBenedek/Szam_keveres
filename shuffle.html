@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Számok Véletlenszerű Rendezése</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .wrapper {
+            text-align: center;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .cell {
+            padding: 20px;
+            background-color: #e0e0e0;
+            border: 1px solid #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #0056b3;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #004099;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="numberGrid" class="grid">
+            <div class="cell">1</div>
+            <div class="cell">2</div>
+            <div class="cell">3</div>
+            <div class="cell">4</div>
+            <div class="cell">5</div>
+            <div class="cell">6</div>
+            <div class="cell">7</div>
+            <div class="cell">8</div>
+            <div class="cell">9</div>
+        </div>
+        <button onclick="shuffleGrid()">Keverés</button>
+    </div>
+
+    <script>
+        const initialNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+        function randomizeArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const randIndex = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[randIndex]] = [arr[randIndex], arr[i]];
+            }
+        }
+
+        function shuffleGrid() {
+            const randomizedNumbers = [...initialNumbers];
+            randomizeArray(randomizedNumbers);
+            
+            const numberGrid = document.getElementById("numberGrid");
+            numberGrid.innerHTML = '';
+            
+            randomizedNumbers.forEach(num => {
+                const cell = document.createElement("div");
+                cell.className = "cell";
+                cell.textContent = num;
+                numberGrid.appendChild(cell);
+            });
+        }
+    </script>
+</body>
+</html>
